@@ -1,0 +1,249 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[americanvoltages,fulldiodes,siunitx]{circuitikz} %per fare i circuiti
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage[italian]{babel}
+\usepackage{eso-pic}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{longtable}
+\graphicspath{ {./immagini/} }
+\linespread{1.1}
+\binoppenalty=10000 %impedisce di separare a capo formule matematiche nel testo
+\relpenalty=10000
+\geometry{
+ total={170mm,257mm},
+ left=20mm,
+ top=15mm,
+ bottom=28mm
+ }
+\title{\textbf{\scalebox{1.4}{\text{Esercitazione 1}}}}
+\date{}
+
+\begin{document}
+\maketitle
+\AddToShipoutPictureBG*{%
+  \AtPageUpperLeft{%
+    \hspace{\paperwidth}%
+    \raisebox{-\baselineskip}{%
+      \makebox[0pt][r]{\textbf{Gruppo 10}: Mussini Simone, Musi Francesco, Ruscillo Fabio        }
+}}}%
+\section{Valore delle resistenze}
+
+\begin{table}[!htb]
+    \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            $N^o$ &Valore $(\Omega)$&Incertezza $(\Omega)$& Codice colore\\
+            \hline
+            $R_1$ & $46.6$         &$0.1$&\\
+            $R_2$ & $147.0$&$0.1$&\\
+            $R_3$ & $998$&$1$&\\
+            $R_4$ & $8,16\cdot 10^{3}$&$10$&\\
+            
+            \hline
+        \end{tabular}
+        \label{Tab Lunghezze}
+        \caption*{\centering Tabella 1: \textit{\footnotesize Sono riportate le resistenze misurate, con i rispettivi errori e codici colore.}}
+        \end{table}
+
+
+\section{Circuito con resistenze $R_3$ e $R_4$}
+
+Si è verificato tramite Voltmetro che $V_0=(10.00\pm 0.01)\ V$ ai capi del circuito.
+
+\begin{figure}[htbp]
+    \centering
+\begin{circuitikz}[scale=1, transform shape]
+\draw (0,0) to [american voltage source, v_=$V_0$, i=$I_0$] (4,0)
+to [short] (4,4);
+\draw [short] (0,4)
+to [short] (0,0);
+% parallelo
+\draw (0,2)[R=$R_3$, *-*, i=$I_3$] to (4,2);
+\draw (0,4)[R=$R_4$, i=$I_4$] to (4,4);
+%voltmetro
+\draw 
+(0.5,0) to  [short] (0.5,-1.7)
+to [rmeter, t=\textbf{V}] (3.5,-1.7)
+to [short] (3.5,0);
+\end{circuitikz}
+\label{Circuito1}
+\caption*{\centering \textbf{Circuito 1}:  \textit{\footnotesize Circuito con due resistori in parallelo e voltmetro che misura la differenza di potenziale ai capi del circuito.}}
+
+\end{figure}
+
+
+\newpage
+
+\subsection{Misura della corrente $I_0$}
+
+
+\begin{figure}[htbp]
+    \centering
+\begin{circuitikz}[scale=0.8, transform shape]
+\draw (0,0) to [american voltage source, v_=$V_0$, i=$I_0$] (4,0)
+to [rmeter, t=\textbf{A}, *-*] (6,0)
+to [short] (8,0)
+to [short] (8,4);
+\draw [short] (0,4)
+to [short] (0,0);
+% parallelo
+\draw (0,2)[R=$R_3$, *-*, i=$I_3$] to (8,2);
+\draw (0,4)[R=$R_4$, i=$I_4$] to (8,4);
+\end{circuitikz}
+\label{Circuito2}
+\caption*{\centering \textbf{Circuito 2}:  \textit{\footnotesize Circuito con due resistori in parallelo e amperometro che misura la corrente totale $I_0$ del circuito.}}
+
+\end{figure}
+
+
+
+
+\subsection{Misura delle correnti $I_3$ e $I_4$}
+\begin{figure}[htbp]
+    \centering
+\begin{circuitikz}[scale=0.8, transform shape]
+\draw (0,0) to [american voltage source, v_=$V_0$, i=$I_0$] (8,0)
+to [short] (8,4);
+\draw [short] (0,4)
+to [short] (0,0);
+% parallelo
+\draw (0,2)to [R=$R_3$, *-, i=$I_3$] (5,2) 
+to [rmeter, t=\textbf{A}, *-*] (8,2);
+\draw (0,4)to [R=$R_4$, i=$I_4$] (8,4);
+\end{circuitikz}
+\label{Circuito3}
+\caption*{\centering \textbf{Circuito 3}:  \textit{\footnotesize Circuito con due resistori in parallelo e amperometro che misura la corrente $I_3$ passante per $R_3$.}}
+
+\end{figure}
+
+
+
+
+
+\begin{figure}[htbp]
+    \centering
+\begin{circuitikz}[scale=0.8, transform shape]
+\draw (0,0) to [american voltage source, v_=$V_0$, i=$I_0$] (8,0)
+to [short] (8,4);
+\draw [short] (0,4)
+to [short] (0,0);
+% parallelo
+\draw (0,2)to [R=$R_3$, *-*, i=$I_3$] (8,2);
+\draw (0,4)to [R=$R_4$, i=$I_4$] (5,4) 
+to [rmeter, t=\textbf{A}, *-*] (8,4);
+\end{circuitikz}
+\label{Circuito4}
+\caption*{\centering \textbf{Circuito 4}:  \textit{\footnotesize Circuito con due resistori in parallelo e amperometro che misura la corrente $I_4$ passante per $R_4$.}}
+
+\end{figure}
+\subsection{Valori teorici delle correnti}
+
+
+
+
+\newpage
+
+\section{Circuito con resistenze $R_1$ e $R_2$}
+
+Si è verificato tramite Voltmetro che $V_0=(0.56\pm 0.01)\ V$ ai capi del circuito. 
+
+Non si è potuto regolare  l'alimentatore fino ad osservare sul Voltmetro il valore $V_0=(0.50\pm 0.01)\ V$, poichè la sensibilità dell'alimentatore è al decimo di volt.
+
+
+\begin{figure}[htbp]
+    \centering
+\begin{circuitikz}[scale=1, transform shape]
+\draw (0,0) to [american voltage source, v_=$V_0$, i=$I_0$] (4,0)
+to [short] (4,4);
+\draw [short] (0,4)
+to [short] (0,0);
+% parallelo
+\draw (0,2)[R=$R_1$, *-*, i=$I_1$] to (4,2);
+\draw (0,4)[R=$R_2$, i=$I_2$] to (4,4);
+%voltmetro
+\draw 
+(0.5,0) to  [short] (0.5,-1.7)
+to [rmeter, t=\textbf{V}] (3.5,-1.7)
+to [short] (3.5,0);
+\end{circuitikz}
+\label{Circuito5}
+\caption*{\centering \textbf{Circuito 5}:  \textit{\footnotesize Circuito con due resistori in parallelo e voltmetro che misura la differenza di potenziale ai capi del circuito.}}
+
+\end{figure}
+
+
+\subsection{Misura della corrente $I_0$}
+
+
+\begin{figure}[htbp]
+    \centering
+\begin{circuitikz}[scale=0.8, transform shape]
+\draw (0,0) to [american voltage source, v_=$V_0$, i=$I_0$] (4,0)
+to [rmeter, t=\textbf{A}, *-*] (6,0)
+to [short] (8,0)
+to [short] (8,4);
+\draw [short] (0,4)
+to [short] (0,0);
+% parallelo
+\draw (0,2)[R=$R_1$, *-*, i=$I_1$] to (8,2);
+\draw (0,4)[R=$R_2$, i=$I_2$] to (8,4);
+\end{circuitikz}
+\label{Circuito6}
+\caption*{\centering \textbf{Circuito 6}:  \textit{\footnotesize Circuito con due resistori in parallelo e amperometro che misura la corrente totale $I_0$ del circuito.}}
+\end{figure}
+
+
+
+\subsection{Misura delle correnti $I_1$ e $I_2$}
+\begin{figure}[htbp]
+    \centering
+\begin{circuitikz}[scale=0.8, transform shape]
+\draw (0,0) to [american voltage source, v_=$V_0$, i=$I_0$] (8,0)
+to [short] (8,4);
+\draw [short] (0,4)
+to [short] (0,0);
+% parallelo
+\draw (0,2)to [R=$R_1$, *-, i=$I_1$] (5,2) 
+to [rmeter, t=\textbf{A}, *-*] (8,2);
+\draw (0,4)to [R=$R_2$, i=$I_2$] (8,4);
+\end{circuitikz}
+\label{Circuito7}
+\caption*{\centering \textbf{Circuito 7}:  \textit{\footnotesize Circuito con due resistori in parallelo e amperometro che misura la corrente $I_1$ passante per $R_1$.}}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+    \centering
+\begin{circuitikz}[scale=0.8, transform shape]
+\draw (0,0) to [american voltage source, v_=$V_0$, i=$I_0$] (8,0)
+to [short] (8,4);
+\draw [short] (0,4)
+to [short] (0,0);
+% parallelo
+\draw (0,2)to [R=$R_1$, *-*, i=$I_1$] (8,2);
+\draw (0,4)to [R=$R_2$, i=$I_2$] (5,4) 
+to [rmeter, t=\textbf{A}, *-*] (8,4);
+\end{circuitikz}
+\label{Circuito8}
+\caption*{\centering \textbf{Circuito 8}:  \textit{\footnotesize Circuito con due resistori in parallelo e amperometro che misura la corrente $I_2$ passante per $R_2$.}}
+\end{figure}
+\newpage
+
+\subsection{Valori teorici delle correnti}
+
+\section{Discussione dei risultati}
+
+
+
+
+
+
+\end{document}
